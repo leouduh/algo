@@ -1,5 +1,6 @@
 #Binary search with no recursion
 
+
 def binary_search(arr, val):
     left, right = 0, len(arr) - 1
     mid = left + (right - left)//2
@@ -12,12 +13,3 @@ def binary_search(arr, val):
             return mid
         mid = left + (right - left) // 2
     return None
-    
-
-
-
-
-
-
-    
-
