@@ -7,8 +7,7 @@ from collections import deque
 class Node:
     def __init__(self, value):
         self.value = value
-        self.distance = None
-        self.explored = None
+        self.distance : None | int = None
 
 
 
@@ -23,7 +22,6 @@ def bfs(graph, root):
         #ignore and carry on with traversal. the next node in the queue.
         if node not in visited:
             visited.append(node)
-            node.explored = True
             for neighbour in graph[node]:
                 if neighbour not in visited:
                     queue.append(neighbour)
@@ -39,6 +37,7 @@ e = Node(5)
 f = Node(6)
 g = Node(7)
 h = Node(8)
+i = Node(9)
 
 #           1
 #         /    \
@@ -47,8 +46,8 @@ h = Node(8)
 #     4   5 ----6   7
 #    | 
 #    8
-#
-#
+#    |
+#    9
 #
 #
 
@@ -60,11 +59,12 @@ graph = {
     e : [f, b], 
     f : [e, c,],
     g : [c],
-    h : [d]
+    h : [d, i],
+    i : [h]
 }
 
 
 bfs(graph, a)
-print(f.value, f.distance, f.explored)
+print(f.value, f.distance, )
 
 
