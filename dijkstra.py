@@ -1,6 +1,7 @@
 from heapq import heapify, heappop, heappush
 
-def dijkstra(graph, root):
+def dijkstra(graph, root, destination):
+
     """
     The graph argument here is a graph dictionary, while the root here is simply a string.
 
@@ -8,6 +9,7 @@ def dijkstra(graph, root):
     visited = []
     distances = {node: (0 if node is root else float("inf")) for node in graph.keys()}
     p_queue = [(0, root)]
+    relationships = {root: root}
     heapify(p_queue)
     while p_queue:
         node_distance, node = heappop(p_queue)
@@ -17,9 +19,19 @@ def dijkstra(graph, root):
                 if node_distance + distance < distances[neighbour]:
                     distances[neighbour] = node_distance + distance
                     heappush(p_queue, ((node_distance + distance) , neighbour))
-    return distances
+                    relationships[neighbour] = node
+    path = destination
+    parent = ""
+    while parent is not root:
+        parent = relationships[destination]
+        path += "==>" + parent
+        destination = parent
+
+        
+    return distances, relationships, path
     
 # Dict of dicts used to represent the graph and weighted relationships
+
 
 graph = {
     "A": {"B": 2, "C":2},
@@ -35,7 +47,8 @@ graph = {
 
 
 
-print(dijkstra(graph, "A"))
+distances, relationships, path = dijkstra(graph, "A", "G")
+print(path)
 
 
 
